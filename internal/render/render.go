@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	"fmt"
+	"github.com/beephsupreme/bookings/internal/config"
 	"github.com/justinas/nosurf"
 	"html/template"
 	"log"
@@ -10,7 +11,6 @@ import (
 	"path/filepath"
 
 	"github.com/beephsupreme/bookings/models"
-	"github.com/beephsupreme/bookings/pkg/config"
 )
 
 var functions = template.FuncMap{}

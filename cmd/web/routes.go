@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/beephsupreme/bookings/internal/config"
+	"github.com/beephsupreme/bookings/internal/handlers"
 	"net/http"
 
-	"github.com/beephsupreme/bookings/pkg/config"
-	"github.com/beephsupreme/bookings/pkg/handlers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 )
@@ -22,7 +22,9 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/majors-suite", handlers.Repo.Majors)
 	mux.Get("/make-reservation", handlers.Repo.Reservation)
 	mux.Get("/contact", handlers.Repo.Contact)
+
 	mux.Get("/search-availability", handlers.Repo.Availability)
+	mux.Post("/search-availability-json", handlers.Repo.AvailabilityJSON)
 	mux.Post("/search-availability", handlers.Repo.PostAvailability)
 
 	fileServer := http.FileServer(http.Dir("./static/"))

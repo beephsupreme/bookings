@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/beephsupreme/bookings/internal/config"
+	"github.com/beephsupreme/bookings/internal/handlers"
+	"github.com/beephsupreme/bookings/internal/render"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/beephsupreme/bookings/pkg/config"
-	"github.com/beephsupreme/bookings/pkg/handlers"
-	"github.com/beephsupreme/bookings/pkg/render"
 )
 
 const portNumber = ":8080"
