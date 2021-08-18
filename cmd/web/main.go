@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"github.com/beephsupreme/bookings/internal/config"
 	"github.com/beephsupreme/bookings/internal/handlers"
 	"github.com/beephsupreme/bookings/internal/render"
+	"github.com/beephsupreme/bookings/models"
 	"log"
 	"net/http"
 	"time"
@@ -18,6 +20,8 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+
+	gob.Register(models.Reservation{})
 
 	app.InProduction = false
 
