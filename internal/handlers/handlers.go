@@ -30,7 +30,10 @@ func NewHandlers(r *Repository) {
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIP := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
-	render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
+	err := render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
+	if err != nil {
+		log.Fatal(fmt.Sprintf("error rendering Home; %s", err))
+	}
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
