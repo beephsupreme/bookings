@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"github.com/beephsupreme/bookings/internal/config"
 	"github.com/beephsupreme/bookings/internal/handlers"
+	"github.com/beephsupreme/bookings/internal/helpers"
 	"github.com/beephsupreme/bookings/internal/render"
 	"github.com/beephsupreme/bookings/models"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
@@ -18,6 +20,8 @@ const portNumber = ":8080"
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 func main() {
 
@@ -43,6 +47,12 @@ func run() error {
 
 	app.InProduction = false
 
+	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
+
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -61,6 +71,7 @@ func run() error {
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
 	return nil
 }
