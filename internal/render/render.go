@@ -7,7 +7,6 @@ import (
 	"github.com/beephsupreme/bookings/internal/config"
 	"github.com/justinas/nosurf"
 	"html/template"
-	"log"
 	"net/http"
 	"path/filepath"
 
@@ -41,7 +40,6 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal("could not get template from cache")
 		return errors.New("could not get template from cache")
 	}
 

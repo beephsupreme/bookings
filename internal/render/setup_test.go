@@ -18,8 +18,10 @@ func TestMain(m *testing.M) {
 
 	gob.Register(models.Reservation{})
 
+	// change this to true when in production
 	testApp.InProduction = false
 
+	// set up the session
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -40,9 +42,7 @@ func (tw *myWriter) Header() http.Header {
 	return h
 }
 
-func (tw *myWriter) WriteHeader(i int) {
-
-}
+func (tw *myWriter) WriteHeader(i int) {}
 
 func (tw *myWriter) Write(b []byte) (int, error) {
 	length := len(b)
