@@ -4,9 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/beephsupreme/bookings/internal/config"
+	"github.com/beephsupreme/bookings/internal/driver"
 	"github.com/beephsupreme/bookings/internal/forms"
 	"github.com/beephsupreme/bookings/internal/helpers"
 	"github.com/beephsupreme/bookings/internal/render"
+	"github.com/beephsupreme/bookings/internal/repository"
+	"github.com/beephsupreme/bookings/internal/repository/dbrepo"
 	"github.com/beephsupreme/bookings/models"
 	"log"
 	"net/http"
@@ -14,13 +17,15 @@ import (
 
 type Repository struct {
 	App *config.AppConfig
+	DB  repository.DatabaseRepo
 }
 
 var Repo *Repository
 
-func NewRepo(a *config.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repository {
 	return &Repository{
 		App: a,
+		DB:  dbrepo.NewPostGresRepo(db.SQL, a),
 	}
 }
 
