@@ -45,8 +45,8 @@ type Reservation struct {
 	Room      Room
 }
 
-// RoomRestrictions = room_restrictions db table model
-type RoomRestrictions struct {
+// RoomRestriction = room_restrictions db table model
+type RoomRestriction struct {
 	Id            int
 	StartDate     time.Time
 	EndDate       time.Time
